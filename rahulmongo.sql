@@ -8,19 +8,21 @@ db.employee_details.find()
 db.employee_details.find().pretty()
 
 
-
-
-
-
-
+db.employee_details.updateOne({"ename":"maya"},{$inc:{"salary":5000}})
+db.employee_details.find({"desig":"developer"})
+db.employee_details.find({"desig":"developer"}).pretty()
+db.employee_details.find({"ename":"rahul"},{"salary":1}).pretty()
+db.employee_details.find({},{"address.city":1}).pretty()
 
 
 //push keyword
-> db.employee_details.updateMany({"eid":101},{$push:{"project":10}})
+ db.employee_details.updateMany({"eid":101},{$push:{"project":10}})
 //pull 
-> db.employee_details.updateMany({"eid":101},{$pull:{"project":10}})
+ db.employee_details.updateMany({"eid":101},{$pull:{"project":10}})
 //addToSet
-> db.employee_details.updateMany({"eid":101},{$addToSet:{"project":10}})
+ db.employee_details.updateMany({"eid":101},{$addToSet:{"project":10}})
 //AddToSet array inside an array
-> db.employee_details.updateMany({"eid":101},{$addToSet:{"project":[20,30]}})
+ db.employee_details.updateMany({"eid":101},{$addToSet:{"project":[20,30]}})
 //regular expression regex
+ db.employee_details.find({"ename":{$regex:"ya"}}).pretty()
+//
