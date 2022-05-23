@@ -30,3 +30,6 @@ use candidate
 
 //select customers who are older than 25 and calculate the average purchase amt for males and females(pipelining)
 db.details.aggregate([{$match:{"age":{$gt:25}}},{$group:{_id:"$gender","total amt":{$avg:"$amt"}}}])
+
+//sort the data based on average amount
+db.details.aggregate([{$match:{"age":{$gt:25}}},{$group:{_id:"$gender","total amt":{$avg:"$amt"}}},{$sort:{avg:1}}])
