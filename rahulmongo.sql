@@ -25,4 +25,22 @@ db.employee_details.find({},{"address.city":1}).pretty()
  db.employee_details.updateMany({"eid":101},{$addToSet:{"project":[20,30]}})
 //regular expression regex
  db.employee_details.find({"ename":{$regex:"ya"}}).pretty()
-//
+//ename of all employees
+ db.employee_details.find({},{"ename":1})
+ //ename starting with a details
+  db.employee_details.find({"ename":{$regex:"^a"}}).pretty()
+  //emplyee names starting with a
+  db.employee_details.find({"ename":{$regex:"^a"}},{"ename":1}).pretty()
+  //employee names ending with n
+   db.employee_details.find({"ename":{$regex:"n$"}},{"ename":1}).pretty()
+   //
+   db.employee_details.remove({"ename":"maya"})
+   //
+   db.employee_details.deleteOne({"ename":"maya"})
+   //
+   db.employee_details.deleteMany({"ename":"maya"})
+   
+   
+   
+   
+  
