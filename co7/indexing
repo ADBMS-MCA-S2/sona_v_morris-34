@@ -1,0 +1,90 @@
+use colleges
+  db.createCollection("clg")
+  db.clg.insert({"admission no":"2146","name":"sona","marks":[{"maths":"90","physics":"82","chemistry":"86"}]})
+  
+  single indexes
+  
+  db.clg.getIndexes()
+  
+  //output
+  
+  [ { "v" : 2, "key" : { "_id" : 1 }, "name" : "_id_" } ]
+  
+  db.clg.createIndex({"admission no":1})
+  
+  //output
+  
+  {
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "createdCollectionAutomatically" : false,
+        "ok" : 1
+}
+
+db.clg.getIndexes()
+
+//output
+
+[
+        {
+                "v" : 2,
+                "key" : {
+                        "_id" : 1
+                },
+                "name" : "_id_"
+        },
+        {
+                "v" : 2,
+                "key" : {
+                        "admission no" : 1
+                },
+                "name" : "admission no_1"
+        }
+]
+
+db.clg.dropIndex({"admission no":1})
+{ "nIndexesWas" : 2, "ok" : 1 }
+
+compound indexes
+
+
+ db.clg.createIndex({"admission no":1},{"name":"sona"})
+ 
+ {
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "createdCollectionAutomatically" : false,
+        "ok" : 1
+}
+
+
+multikey indexes
+
+db.clg.createIndex({"mark.maths":1})
+
+db.clg.getIndexes()
+
+[
+        {
+                "v" : 2,
+                "key" : {
+                        "_id" : 1
+                },
+                "name" : "_id_"
+        },
+        {
+                "v" : 2,
+                "key" : {
+                        "admission no" : 1
+                },
+                "name" : "sona"
+        },
+        {
+                "v" : 2,
+                "key" : {
+                        "mark.maths" : 1
+                },
+                "name" : "mark.maths_1"
+        }
+]
+
