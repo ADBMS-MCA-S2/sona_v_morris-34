@@ -88,3 +88,48 @@ db.clg.getIndexes()
         }
 ]
 
+
+
+ text indexes
+ 
+ db.createCollection("comment")
+ db.comment.insert({"name":"sona","post":"welcome to ooty"})
+  db.comment.insert({"name":"morris","post":"nice to meet you"})
+  db.comment.insert({"name":"thomas","post":"welcome"})
+  db.comment.insert({"name":"mathew","post":"everyone"})
+  db.comment.createIndex({"post":"text"})
+{
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "createdCollectionAutomatically" : false,
+        "ok" : 1
+}
+> db.comment.getIndexes()
+[
+        {
+                "v" : 2,
+                "key" : {
+                        "_id" : 1
+                },
+                "name" : "_id_"
+        },
+        {
+                "v" : 2,
+                "key" : {
+                        "_fts" : "text",
+                        "_ftsx" : 1
+                },
+                "name" : "post_text",
+                "weights" : {
+                        "post" : 1
+                },
+                "default_language" : "english",
+                "language_override" : "language",
+                "textIndexVersion" : 3
+        }
+]
+db.comment.find({$text:{$search:"\"welcome\""}})
+{ "_id" : ObjectId("62a072e6acce5a97a5d851eb"), "name" : "thomas", "post" : "welcome" }
+{ "_id" : ObjectId("62a0728cacce5a97a5d851e9"), "name" : "sona", "post" : "welcome to ooty" }
+
+ 
